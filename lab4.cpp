@@ -4,29 +4,29 @@
 
 using namespace std;
 const short rows = 5;
-const short cols = 5;
+const short columns = 5;
 
 class Matrix
 {
 private:
-	int matrix[rows][cols];
-	vector<int> minimumsInCols;
+	int matrix[rows][columns];
+	vector<int> minimumsInColumns;
 public:
-	void InputMatrix();
-	void OutputMatrix();
-	void InsertionSort();
+	void ReadMatrixFromConsole();
+	void WriteMatrixToConsole();
+	void InsertionSortOfColumns();
 	void MinimumsOfColumns();
-	void WriteMinimums();
+	void WriteMinimumsToConsole();
 	int ProductOfMinimums();
 };
 
-void Matrix::InputMatrix()
+void Matrix::ReadMatrixFromConsole()
 {
 	cout << "Enter matrix:" << endl;
 
 	for (int i = 0; i < rows; i++)
 	{
-		for (int j = 0; j < cols; j++)
+		for (int j = 0; j < columns; j++)
 		{
 			cout << "matrix[" << i + 1 << "][" << j + 1 << "] = ";
 			cin >> matrix[i][j];
@@ -34,23 +34,23 @@ void Matrix::InputMatrix()
 	}
 }
 
-void Matrix::OutputMatrix()
+void Matrix::WriteMatrixToConsole()
 {
 	for (int i = 0; i < rows; i++, cout << endl)
 	{
-		for (int j = 0; j < cols; j++)
+		for (int j = 0; j < columns; j++)
 		{
 			cout << "\t" << matrix[i][j];
 		}
 	}
 }
 
-void Matrix::InsertionSort()
+void Matrix::InsertionSortOfColumns()
 {
 	int temp, previousItem;
 	for (int i = 0; i < rows; i++)
 	{
-		for (int j = 1; j < cols; j++)
+		for (int j = 1; j < columns; j++)
 		{
 			temp = matrix[i][j];
 			previousItem = j - 1;
@@ -66,7 +66,7 @@ void Matrix::InsertionSort()
 
 void Matrix::MinimumsOfColumns()
 {
-	for (int j = 0; j < cols; j++)
+	for (int j = 0; j < columns; j++)
 	{
 		int min = matrix[0][j];
 		for (int i = 0; i < rows; i++)
@@ -74,17 +74,17 @@ void Matrix::MinimumsOfColumns()
 			if (matrix[i][j] < min)
 				min = matrix[i][j];
 		}
-		minimumsInCols.push_back(min);
+		minimumsInColumns.push_back(min);
 	}
 }
 
-void Matrix::WriteMinimums()
+void Matrix::WriteMinimumsToConsole()
 {
 	cout << "\nMinimums in columns list:" << endl;
 
 	for (int i = 0; i < rows; i++)
 	{
-		cout << minimumsInCols[i] << ' ';
+		cout << minimumsInColumns[i] << ' ';
 	}
 	cout << endl << endl;
 }
@@ -95,7 +95,7 @@ int Matrix::ProductOfMinimums() {
 
 	for (int i = 0; i < rows; i++)
 	{
-		product *= minimumsInCols[i];
+		product *= minimumsInColumns[i];
 	}
 }
 
@@ -103,18 +103,18 @@ int main()
 {
 	Matrix matrix;
 
-	matrix.InputMatrix();
+	matrix.ReadMatrixFromConsole();
 
 	cout << "\n Inputed matrix:" << endl;
-	matrix.OutputMatrix();
+	matrix.WriteMatrixToConsole();
 
-	matrix.InsertionSort();
+	matrix.InsertionSortOfColumns();
 
 	cout << "\n Sorted matrix:" << endl;
-	matrix.OutputMatrix();
+	matrix.WriteMatrixToConsole();
 
 	matrix.MinimumsOfColumns();
-	matrix.WriteMinimums();
+	matrix.WriteMinimumsToConsole();
 
 	cout << "Product of minimums: " << matrix.ProductOfMinimums() << endl << endl;
 
