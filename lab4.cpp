@@ -14,9 +14,9 @@ private:
 public:
 	void ReadMatrixFromConsole();
 	void WriteMatrixToConsole();
-	void InsertionSortOfRows();
-	void ChooseMinimumsOfColumns();
-	void WriteMinimums();
+	void InsertionSortOfColumns();
+	void MinimumsOfColumns();
+	void WriteMinimumsToConsole();
 	int ProductOfMinimums();
 };
 
@@ -45,7 +45,7 @@ void Matrix::WriteMatrixToConsole()
 	}
 }
 
-void Matrix::InsertionSortOfRows()
+void Matrix::InsertionSortOfColumns()
 {
 	int temp, previousItem;
 	for (int i = 0; i < rows; i++)
@@ -64,7 +64,7 @@ void Matrix::InsertionSortOfRows()
 	}
 }
 
-void Matrix::ChooseMinimumsOfColumns()
+void Matrix::MinimumsOfColumns()
 {
 	for (int j = 0; j < columns; j++)
 	{
@@ -78,7 +78,7 @@ void Matrix::ChooseMinimumsOfColumns()
 	}
 }
 
-void Matrix::WriteMinimums()
+void Matrix::WriteMinimumsToConsole()
 {
 	cout << "\nMinimums in columns list:" << endl;
 
@@ -108,13 +108,13 @@ int main()
 	cout << "\n Inputed matrix:" << endl;
 	matrix.WriteMatrixToConsole();
 
-	matrix.InsertionSortOfRows();
+	matrix.InsertionSortOfColumns();
 
 	cout << "\n Sorted matrix:" << endl;
 	matrix.WriteMatrixToConsole();
 
-	matrix.ChooseMinimumsOfColumns();
-	matrix.WriteMinimums();
+	matrix.MinimumsOfColumns();
+	matrix.WriteMinimumsToConsole();
 
 	cout << "Product of minimums: " << matrix.ProductOfMinimums() << endl << endl;
 
