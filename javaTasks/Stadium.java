@@ -26,7 +26,6 @@ public class Stadium {
         setType(type);
         setNumberOfSeats(numberOfSeats);
         setFieldArea(fieldArea);
-        totalNumberOfSeats += numberOfSeats;
     }
 
     public Stadium(String name, String type, int numberOfSeats, int fieldArea, String covering) {
@@ -35,7 +34,6 @@ public class Stadium {
         setNumberOfSeats(numberOfSeats);
         setFieldArea(fieldArea);
         setCovering(covering);
-        totalNumberOfSeats += numberOfSeats;
     }
 
     @Override
@@ -53,13 +51,11 @@ public class Stadium {
     }
 
     public void resetValues(String name, String type, int numberOfSeats, int fieldArea, String covering) {
-        totalNumberOfSeats -= this.numberOfSeats;
         setName(name);
         setType(type);
         setNumberOfSeats(numberOfSeats);
         setFieldArea(fieldArea);
         setCovering(covering);
-        totalNumberOfSeats += numberOfSeats;
     }
 
     public String getName() {
