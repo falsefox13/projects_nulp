@@ -1,22 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author Користувач
- */
 public class Stadium {
-
+    public static int totalNumberOfSeats = 0;
     private String name = "NoName";
-    private String type; //universal, soccer, etc
+    private String type; 
     private int numberOfSeats;
     private long fieldArea;
     private String covering = "grass";
-
-    public static int totalNumberOfSeats = 0;
 
     public Stadium() {
     }
@@ -38,8 +26,10 @@ public class Stadium {
 
     @Override
     public String toString() {
-        return "Stadium is called " + name + ", is for " + type + ", games, has seats: " + numberOfSeats
-                + ", has area: " + fieldArea + ", is covered with " + covering;
+        return "Stadium is called " + name + ", is for " + type 
+                    + ", games, has seats: " + numberOfSeats
+                    + ", has area: " + fieldArea
+                    + ", is covered with " + covering;
     }
 
     static void printStaticSum() {
