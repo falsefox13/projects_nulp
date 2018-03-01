@@ -6,50 +6,54 @@ public class Ship {
     private int capacity;
     private int speed;
 
-    public Ship() {}
-
-    public Ship(long length, long width, int capacity, int speed) {
-        this.length = length;
-        this.width = width;
-        this.capacity = capacity;
-        this.speed = speed;
+    public Ship() {
     }
 
-    public long getLength() {
+    public Ship(final long newLength, final long newWidth, final int newCapacity, final int newSpeed) {
+        this.length = newLength;
+        this.width = newWidth;
+        this.capacity = newCapacity;
+        this.speed = newSpeed;
+    }
+
+    public final long getLength() {
         return this.length;
     }
 
-    public void setLength(long newLength) {
+    public final void setLength(final long newLength) {
         this.length = newLength;
     }
 
-    public long getWidth() {
+    public final long getWidth() {
         return this.width;
     }
 
-    public void setWidth(long newWidth) {
+    public final void setWidth(final long newWidth) {
         this.width = newWidth;
     }
 
-    public int getCapacity() {
+    public final int getCapacity() {
         return this.capacity;
     }
 
-    public void setCapacity(int newCapacity) {
+    public final void setCapacity(final int newCapacity) {
         this.capacity = newCapacity;
     }
 
-    public int getSpeed() {
+    public final int getSpeed() {
         return this.speed;
     }
 
-    public void setSpeed(int newSpeed) {
+    public final void setSpeed(final int newSpeed) {
         this.speed = newSpeed;
     }
-    
+
     @Override
-    public String toString() {
-        return "This is ship!!\n";
+    public final String toString() {
+        return "Ship "
+                + "length = " + length
+                + ", width = " + width
+                + ", capacity = " + capacity
+                + ", speed = " + speed;
     }
 }
-
