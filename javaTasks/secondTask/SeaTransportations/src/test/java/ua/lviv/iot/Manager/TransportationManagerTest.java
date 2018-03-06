@@ -21,24 +21,29 @@ class TransportationManagerTest {
         marCarrier.addShip(new Ship(10000, 4000, 30, 400));
         marCarrier.addShip(new Ship(10000, 4000, 20, 550));
         assertEquals(marCarrier.selectCheapest(sender, dest, 0, 25), "There is no such cheap transportation");
-        //assertEquals(marCarrier.selectCheapest(sender, dest, 50000, 25), "The cheapest: Ship leng"
+        assertEquals(marCarrier.selectCheapest(sender, dest, 50000, 25), "The cheapest: Transportation from: Port called Chornomorsk to Port called Europort\n" +
+                                                                                                "with cargo: 25tonns will cost: 4466.0$\n" +
+                                                                                                "and will last for:7 days");
     }
 
     @Test
     void selectFastest() {
-        assertEquals(marCarrier.selectCheapest(sender, dest, 100, 50), "No available ships");
 
+        assertEquals(marCarrier.selectFastest(sender, dest, 100), "No available ships");
         marCarrier.addShip(new Ship(10000, 4000, 30, 400));
+    void selectFastest() {0, 4000, 30, 400};
         marCarrier.addShip(new Ship(10000, 4000, 20, 550));
-        assertEquals(marCarrier.selectCheapest(sender, dest, 0, 25), "There is no such cheap transportation");
+        assertEquals(marCarrier.selectFastest(sender, dest, 15), "The fastest: Transportation from: Port called Chornomorsk to Port called Europort\n" +
+                                                                                "with cargo: 15tonns will cost: 3966.0$\n" +
+                                                                                "and will last for:5 days");
     }
 
     @Test
     void doTransportation() {
-
         marCarrier.addShip(new Ship(10000, 4000, 30, 400));
         marCarrier.addShip(new Ship(10000, 4000, 20, 550));
         assertTrue(marCarrier.doTransportation(sender, dest, 25));
+        assertFalse(marCarrier.doTransportation(sender, dest, 60));
     }
 
 }

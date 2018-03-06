@@ -27,7 +27,7 @@ public class TransportationManager {
      */
     private int getIndexOfNeededShip(final int cargo) {
         int indexOfNeededShip = -1;
-        if (availableShips.isEmpty() != true) {
+        if (!availableShips.isEmpty()) {
             for (int i = 0; i < availableShips.size(); i++) {
                 if (availableShips.get(i).getCapacity() >= cargo) {
                     indexOfNeededShip = i;
@@ -45,16 +45,17 @@ public class TransportationManager {
     public final String selectCheapest(final Port sender, final Port dest, final int maxPrice, final int cargo) {
         SeaTransportation possible = new SeaTransportation(sender, dest, cargo, maxPrice);
         int indexOfShip = getIndexOfNeededShip(cargo);
-        if (indexOfShip >= 0) {
-            if (possible.calculatePrice() < maxPrice) {
-                possible.calculateTime(availableShips.get(indexOfShip).getSpeed());
-                return "The cheapest: " + possible.toString();
-            } else {
-                return "There is no such cheap transportation";
-            }
-        } else {
+        if (indexOfShip < 0) {
             return "No available ships";
         }
+
+        if (possible.calculatePrice() < maxPrice) {
+            possible.calculateTime(availableShips.get(indexOfShip).getSpeed());
+            return "The cheapest: " + possible.toString();
+        } else {
+            return "There is no such cheap transportation";
+        }
+
     }
 
     /**
@@ -65,19 +66,20 @@ public class TransportationManager {
     public final String selectFastest(final Port sender, final Port dest, final int cargo) {
         SeaTransportation possible = new SeaTransportation(sender, dest, cargo);
         int indexOfShip = getIndexOfNeededShip(cargo);
-        if (indexOfShip >= 0) {
-            int fastestShipIndex = -1;
-            int fastest = 0;
-            for (int i = 0; i < availableShips.size(); i++) {
-                if (availableShips.get(i).getSpeed() > fastest) {
-                    fastestShipIndex = i;
-                }
-            }
-            possible.calculateTime(availableShips.get(fastestShipIndex).getSpeed());
-            return "The fastest: " + possible.toString();
-        } else {
+
+        if (indexOfShip < 0) {
             return "No available ships";
         }
+
+        int fastestShipIndex = -1;
+        int fastest = 0;
+        for (int i = 0; i < availableShips.size(); i++) {
+            if (availableShips.get(i).getSpeed() > fastest) {
+                fastestShipIndex = i;
+            }
+        }
+        possible.calculateTime(availableShips.get(fastestShipIndex).getSpeed());
+        return "The fastest: " + possible.toString();
     }
 
     /**
@@ -96,15 +98,7 @@ public class TransportationManager {
         }
     }
 
-    public final ArrayList<Ship> getAvailableShips() {
-        return this.availableShips;
-    }
-
     public final void addShip(final Ship obj) {
         this.availableShips.add(obj);
-    }
-
-    public final ArrayList<SeaTransportation> getTransportations() {
-        return this.transportations;
     }
 }
