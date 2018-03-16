@@ -1,0 +1,194 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: SeaTransportation</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">ua.lviv.iot.Models</a> ]
+</div>
+
+<h1>Coverage Summary for Class: SeaTransportation (ua.lviv.iot.Models)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SeaTransportation</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (8/ 10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91,7%
+  </span>
+  <span class="absValue">
+    (33/ 36)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package ua.lviv.iot.Models;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;/**
+<i>4</i>&nbsp; * Class that describe one concrete transportation,
+<i>5</i>&nbsp; * can calculate time, price and distance of one transportation.
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; * @author falsefox
+<i>8</i>&nbsp; */
+<i>9</i>&nbsp;public class SeaTransportation {
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;    /**
+<i>12</i>&nbsp;     * For calculating a distance.
+<i>13</i>&nbsp;     */
+<i>14</i>&nbsp;    public static final double RADIUS_OF_EARTH = 6371.009;
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    private Port sender;
+<i>17</i>&nbsp;    private Port destination;
+<i>18</i>&nbsp;    private double priceOfTransportation;
+<i>19</i>&nbsp;    private int maxPrice;
+<i>20</i>&nbsp;    private int durationInDays;
+<i>21</i>&nbsp;    private int cargo; //in tonns
+<i>22</i>&nbsp;
+<b class="fc"><i>23</i>&nbsp;    public SeaTransportation(final Port newSender, final Port newDestination, final int newCargo) {</b>
+<b class="fc"><i>24</i>&nbsp;        this.sender = newSender;</b>
+<b class="fc"><i>25</i>&nbsp;        this.destination = newDestination;</b>
+<b class="fc"><i>26</i>&nbsp;        this.cargo = newCargo;</b>
+<b class="fc"><i>27</i>&nbsp;        calculatePrice();</b>
+<b class="fc"><i>28</i>&nbsp;        calculateTime(300);</b>
+<b class="fc"><i>29</i>&nbsp;    }</b>
+<i>30</i>&nbsp;
+<b class="fc"><i>31</i>&nbsp;    public SeaTransportation(final Port newSender, final Port newDestination, final int newCargo, final int newMaxPrice) {</b>
+<b class="fc"><i>32</i>&nbsp;        this.sender = newSender;</b>
+<b class="fc"><i>33</i>&nbsp;        this.destination = newDestination;</b>
+<b class="fc"><i>34</i>&nbsp;        this.cargo = newCargo;</b>
+<b class="fc"><i>35</i>&nbsp;        this.maxPrice = newMaxPrice;</b>
+<b class="fc"><i>36</i>&nbsp;        calculatePrice();</b>
+<b class="fc"><i>37</i>&nbsp;        calculateTime(300);</b>
+<b class="fc"><i>38</i>&nbsp;    }</b>
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;    public final String getHeaders() {
+<b class="fc"><i>41</i>&nbsp;        return &quot;sender, destination, priceOfTransportation, maxPrice, durationInDays, cargo&quot;;</b>
+<i>42</i>&nbsp;    }
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;    public final String toCSV() {
+<b class="fc"><i>45</i>&nbsp;        return this.sender + &quot;, &quot;</b>
+<i>46</i>&nbsp;                + this.destination + &quot;, &quot;
+<i>47</i>&nbsp;                + this.priceOfTransportation + &quot;, &quot;
+<i>48</i>&nbsp;                + this.maxPrice + &quot;, &quot;
+<i>49</i>&nbsp;                + this.durationInDays + &quot;, &quot;
+<i>50</i>&nbsp;                + this.cargo;
+<i>51</i>&nbsp;    }
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    /**
+<i>54</i>&nbsp;     * Calculate distance of transportation, using formula from wikipedia.
+<i>55</i>&nbsp;     *
+<i>56</i>&nbsp;     * @return distance in kilometers.
+<i>57</i>&nbsp;     */
+<i>58</i>&nbsp;    public final double calculateDistance() {
+<b class="fc"><i>59</i>&nbsp;        double diffOfLatitude = destination.getLatitude() - sender.getLatitude();</b>
+<b class="fc"><i>60</i>&nbsp;        double diffOfLongtitude = destination.getLongtitude() - sender.getLongtitude();</b>
+<b class="fc"><i>61</i>&nbsp;        double averageLatitude = (destination.getLatitude() - sender.getLatitude()) / 2;</b>
+<b class="fc"><i>62</i>&nbsp;        double distance = RADIUS_OF_EARTH * (Math.sqrt(Math.pow(diffOfLatitude, 2) + Math.pow((Math.acos(averageLatitude) * diffOfLongtitude), 2)));</b>
+<b class="fc"><i>63</i>&nbsp;        return Math.floor(distance);</b>
+<i>64</i>&nbsp;    }
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;    /**
+<i>67</i>&nbsp;     * Calculate price of transportation using data from http://itl-ltd.com.
+<i>68</i>&nbsp;     *
+<i>69</i>&nbsp;     * @return price in $.
+<i>70</i>&nbsp;     */
+<i>71</i>&nbsp;    public final double calculatePrice() {
+<i>72</i>&nbsp;        int priceOfContainer;
+<b class="fc"><i>73</i>&nbsp;        if (this.cargo &lt;= 20) {</b>
+<b class="fc"><i>74</i>&nbsp;            priceOfContainer = 1000;</b>
+<b class="fc"><i>75</i>&nbsp;        } else if (this.cargo &gt; 20 &amp;&amp; this.cargo &lt; 40) {</b>
+<b class="fc"><i>76</i>&nbsp;            priceOfContainer = 1500;</b>
+<i>77</i>&nbsp;        } else {
+<b class="fc"><i>78</i>&nbsp;            priceOfContainer = 50 * this.cargo;</b>
+<i>79</i>&nbsp;        }
+<b class="fc"><i>80</i>&nbsp;        this.priceOfTransportation = priceOfContainer + calculateDistance();</b>
+<b class="fc"><i>81</i>&nbsp;        return Math.floor(this.priceOfTransportation);</b>
+<i>82</i>&nbsp;    }
+<i>83</i>&nbsp;
+<i>84</i>&nbsp;    /**
+<i>85</i>&nbsp;     * Calculate duration of the transportation.
+<i>86</i>&nbsp;     *
+<i>87</i>&nbsp;     * @param averageSpeed speed of the Ship.
+<i>88</i>&nbsp;     * @return duration of the transportation in days.
+<i>89</i>&nbsp;     */
+<i>90</i>&nbsp;    public final int calculateTime(final int averageSpeed) {
+<b class="fc"><i>91</i>&nbsp;        this.durationInDays = (int) calculateDistance() / averageSpeed;</b>
+<b class="fc"><i>92</i>&nbsp;        return this.durationInDays;</b>
+<i>93</i>&nbsp;    }
+<i>94</i>&nbsp;
+<i>95</i>&nbsp;    @Override
+<i>96</i>&nbsp;    public final String toString() {
+<b class="fc"><i>97</i>&nbsp;        return &quot;Transportation from: &quot; + this.sender.toString()</b>
+<b class="fc"><i>98</i>&nbsp;                + &quot; to &quot; + this.destination.toString()</b>
+<i>99</i>&nbsp;                + &quot;\nwith cargo: &quot; + this.cargo
+<i>100</i>&nbsp;                + &quot;tonns will cost: &quot; + this.priceOfTransportation
+<i>101</i>&nbsp;                + &quot;$\nand will last for:&quot; + this.durationInDays + &quot; days&quot;;
+<i>102</i>&nbsp;    }
+<i>103</i>&nbsp;
+<i>104</i>&nbsp;    public final Port getSender() {
+<b class="nc"><i>105</i>&nbsp;        return this.sender;</b>
+<i>106</i>&nbsp;    }
+<i>107</i>&nbsp;
+<i>108</i>&nbsp;    public final void setSender(final Port newSender) {
+<b class="nc"><i>109</i>&nbsp;        this.sender = newSender;</b>
+<b class="nc"><i>110</i>&nbsp;    }</b>
+<i>111</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2018-03-14 20:27</div>
+</div>
+</body>
+</html>

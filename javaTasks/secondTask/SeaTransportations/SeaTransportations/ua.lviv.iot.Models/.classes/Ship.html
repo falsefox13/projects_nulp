@@ -1,0 +1,126 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Ship</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">ua.lviv.iot.Models</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Ship (ua.lviv.iot.Models)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Ship</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83,3%
+  </span>
+  <span class="absValue">
+    (5/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90,9%
+  </span>
+  <span class="absValue">
+    (10/ 11)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package ua.lviv.iot.Models;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;public class Ship {
+<i>4</i>&nbsp;    private long length;
+<i>5</i>&nbsp;    private long width;
+<i>6</i>&nbsp;    private int capacity;
+<i>7</i>&nbsp;    private int speed;
+<i>8</i>&nbsp;
+<b class="fc"><i>9</i>&nbsp;    public Ship(final long newLength, final long newWidth, final int newCapacity, final int newSpeed) {</b>
+<b class="fc"><i>10</i>&nbsp;        this.length = newLength;</b>
+<b class="fc"><i>11</i>&nbsp;        this.width = newWidth;</b>
+<b class="fc"><i>12</i>&nbsp;        this.capacity = newCapacity;</b>
+<b class="fc"><i>13</i>&nbsp;        this.speed = newSpeed;</b>
+<b class="fc"><i>14</i>&nbsp;    }</b>
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    public final String getHeaders() {
+<b class="fc"><i>17</i>&nbsp;        return &quot;length, width, capacity, speed&quot;;</b>
+<i>18</i>&nbsp;    }
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    public final String toCSV() {
+<b class="fc"><i>21</i>&nbsp;        return this.length + &quot;, &quot;</b>
+<i>22</i>&nbsp;                + this.width + &quot;, &quot;
+<i>23</i>&nbsp;                + this.capacity + &quot;, &quot;
+<i>24</i>&nbsp;                + this.speed;
+<i>25</i>&nbsp;    }
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    public final int getCapacity() {
+<b class="fc"><i>28</i>&nbsp;        return this.capacity;</b>
+<i>29</i>&nbsp;    }
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    public final int getSpeed() {
+<b class="fc"><i>32</i>&nbsp;        return this.speed;</b>
+<i>33</i>&nbsp;    }
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;    @Override
+<i>36</i>&nbsp;    public final String toString() {
+<b class="nc"><i>37</i>&nbsp;        return &quot;Ship &quot;</b>
+<i>38</i>&nbsp;                + &quot;length = &quot; + length
+<i>39</i>&nbsp;                + &quot;, width = &quot; + width
+<i>40</i>&nbsp;                + &quot;, capacity = &quot; + capacity
+<i>41</i>&nbsp;                + &quot;, speed = &quot; + speed;
+<i>42</i>&nbsp;    }
+<i>43</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2018-03-14 20:27</div>
+</div>
+</body>
+</html>

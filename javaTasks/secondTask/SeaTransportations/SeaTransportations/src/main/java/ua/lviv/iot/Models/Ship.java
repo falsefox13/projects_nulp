@@ -6,9 +6,6 @@ public class Ship {
     private int capacity;
     private int speed;
 
-    public Ship() {
-    }
-
     public Ship(final long newLength, final long newWidth, final int newCapacity, final int newSpeed) {
         this.length = newLength;
         this.width = newWidth;
@@ -16,36 +13,23 @@ public class Ship {
         this.speed = newSpeed;
     }
 
-    public final long getLength() {
-        return this.length;
+    public final String getHeaders() {
+        return "length, width, capacity, speed";
     }
 
-    public final void setLength(final long newLength) {
-        this.length = newLength;
-    }
-
-    public final long getWidth() {
-        return this.width;
-    }
-
-    public final void setWidth(final long newWidth) {
-        this.width = newWidth;
+    public final String toCSV() {
+        return this.length + ", "
+                + this.width + ", "
+                + this.capacity + ", "
+                + this.speed;
     }
 
     public final int getCapacity() {
         return this.capacity;
     }
 
-    public final void setCapacity(final int newCapacity) {
-        this.capacity = newCapacity;
-    }
-
     public final int getSpeed() {
         return this.speed;
-    }
-
-    public final void setSpeed(final int newSpeed) {
-        this.speed = newSpeed;
     }
 
     @Override

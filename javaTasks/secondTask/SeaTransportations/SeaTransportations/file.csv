@@ -1,0 +1,14 @@
+length, width, capacity, speed
+10000, 4000, 30, 400
+length, width, capacity, speed
+10000, 4000, 20, 550
+length, width, capacity, speed
+10000, 4000, 40, 650
+length, width, capacity, speed
+10000, 4000, 20, 550
+length, width, capacity, speed
+10000, 4000, 20, 550
+length, width, capacity, speed
+10000, 4000, 20, 550
+sender, destination, priceOfTransportation, maxPrice, durationInDays, cargo
+Port called Chornomorsk, Port called Europort, 3966.0, 0, 9, 10

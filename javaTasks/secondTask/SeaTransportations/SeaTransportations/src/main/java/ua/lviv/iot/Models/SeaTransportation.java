@@ -20,9 +20,6 @@ public class SeaTransportation {
     private int durationInDays;
     private int cargo; //in tonns
 
-    public SeaTransportation() {
-    }
-
     public SeaTransportation(final Port newSender, final Port newDestination, final int newCargo) {
         this.sender = newSender;
         this.destination = newDestination;
@@ -38,6 +35,19 @@ public class SeaTransportation {
         this.maxPrice = newMaxPrice;
         calculatePrice();
         calculateTime(300);
+    }
+
+    public final String getHeaders() {
+        return "sender, destination, priceOfTransportation, maxPrice, durationInDays, cargo";
+    }
+
+    public final String toCSV() {
+        return this.sender + ", "
+                + this.destination + ", "
+                + this.priceOfTransportation + ", "
+                + this.maxPrice + ", "
+                + this.durationInDays + ", "
+                + this.cargo;
     }
 
     /**
@@ -97,45 +107,5 @@ public class SeaTransportation {
 
     public final void setSender(final Port newSender) {
         this.sender = newSender;
-    }
-
-    public final Port getDestination() {
-        return this.destination;
-    }
-
-    public final void setDestination(final Port newDestination) {
-        this.destination = newDestination;
-    }
-
-    public final double getPriceOfTransportation() {
-        return this.priceOfTransportation;
-    }
-
-    public final void setPriceOfTransportation(final double newPrice) {
-        this.priceOfTransportation = newPrice;
-    }
-
-    public final int getMaxPrice() {
-        return this.maxPrice;
-    }
-
-    public final void setMaxPrice(final int newMaxPrice) {
-        this.maxPrice = newMaxPrice;
-    }
-
-    public final int getDuration() {
-        return this.durationInDays;
-    }
-
-    public final void setDuration(final int newDuration) {
-        this.durationInDays = newDuration;
-    }
-
-    public final int getCargo() {
-        return this.cargo;
-    }
-
-    public final void setCargo(final int newCargo) {
-        this.cargo = newCargo;
     }
 }
