@@ -1,6 +1,7 @@
 package ua.lviv.iot.Models;
 
 public class Ship {
+    private int id;
     private long length;
     private long width;
     private int capacity;
@@ -39,5 +40,13 @@ public class Ship {
                 + ", width = " + width
                 + ", capacity = " + capacity
                 + ", speed = " + speed;
+    }
+
+    public final int getId() {
+        return this.id;
+    }
+
+    public final void setId(final int newId) {
+        this.id = newId;
     }
 }

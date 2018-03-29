@@ -5,7 +5,9 @@ import ua.lviv.iot.Models.SeaTransportation;
 import ua.lviv.iot.Models.Ship;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Class that handle transportations,
@@ -14,8 +16,8 @@ import java.util.List;
  * @author falsefox13
  */
 public class TransportationManager {
-    private ArrayList<Ship> availableShips = new ArrayList<Ship>();
-    private ArrayList<SeaTransportation> transportations = new ArrayList<SeaTransportation>();
+    private List<Ship> availableShips = new ArrayList<Ship>();
+    private Map<Integer, SeaTransportation> transportations = new HashMap<>();
 
     public TransportationManager() {
     }
@@ -91,7 +93,8 @@ public class TransportationManager {
     public final boolean doTransportation(final Port sender, final Port dest, final int cargo) {
         int indexOfShip = getIndexOfNeededShip(cargo);
         if (indexOfShip >= 0) {
-            transportations.add(new SeaTransportation(sender, dest, cargo));
+            SeaTransportation transp = new SeaTransportation(sender, dest, cargo);
+            transportations.put(transp.getId(), transp);
             availableShips.remove(indexOfShip);
             return true;
         } else {
@@ -103,11 +106,15 @@ public class TransportationManager {
         this.availableShips.add(obj);
     }
 
+    public final void addTransportation(final SeaTransportation transportation) {
+        transportations.put(transportation.getId(), transportation);
+    }
+
     public final List<Ship> getShips() {
         return this.availableShips;
     }
 
-    public final List<SeaTransportation> getTransportation() {
-        return this.transportations;
+    public final Map<Integer, SeaTransportation> getTransportations() {
+        return transportations;
     }
 }

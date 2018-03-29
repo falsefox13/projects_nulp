@@ -13,6 +13,7 @@ public class SeaTransportation {
      */
     public static final double RADIUS_OF_EARTH = 6371.009;
 
+    private int id;
     private Port sender;
     private Port destination;
     private double priceOfTransportation;
@@ -20,6 +21,13 @@ public class SeaTransportation {
     private int durationInDays;
     private int cargo; //in tonns
 
+    public  SeaTransportation(){
+
+    }
+    public SeaTransportation (final int id){
+        this.id=id;
+
+    }
     public SeaTransportation(final Port newSender, final Port newDestination, final int newCargo) {
         this.sender = newSender;
         this.destination = newDestination;
@@ -37,7 +45,61 @@ public class SeaTransportation {
         calculateTime(300);
     }
 
-    public final String getHeaders() {
+    public SeaTransportation(final Port newSender, final Port newDestination, final int newCargo, final int newMaxPrice, final int newId) {
+        this.sender = newSender;
+        this.destination = newDestination;
+        this.cargo = newCargo;
+        this.maxPrice = newMaxPrice;
+        this.id = newId;
+        calculatePrice();
+        calculateTime(300);
+    }
+
+    public static double getRadiusOfEarth() {
+        return RADIUS_OF_EARTH;
+    }
+
+    public Port getDestination() {
+        return destination;
+    }
+
+    public void setDestination(Port destination) {
+        this.destination = destination;
+    }
+
+    public double getPriceOfTransportation() {
+        return priceOfTransportation;
+    }
+
+    public void setPriceOfTransportation(double priceOfTransportation) {
+        this.priceOfTransportation = priceOfTransportation;
+    }
+
+    public int getMaxPrice() {
+        return maxPrice;
+    }
+
+    public void setMaxPrice(int maxPrice) {
+        this.maxPrice = maxPrice;
+    }
+
+    public int getDurationInDays() {
+        return durationInDays;
+    }
+
+    public void setDurationInDays(int durationInDays) {
+        this.durationInDays = durationInDays;
+    }
+
+    public int getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(int cargo) {
+        this.cargo = cargo;
+    }
+
+    public final String petHeaders() {
         return "sender, destination, priceOfTransportation, maxPrice, durationInDays, cargo";
     }
 
@@ -107,5 +169,13 @@ public class SeaTransportation {
 
     public final void setSender(final Port newSender) {
         this.sender = newSender;
+    }
+
+    public final int getId() {
+        return this.id;
+    }
+
+    public final void setId(final int newId) {
+        this.id = newId;
     }
 }

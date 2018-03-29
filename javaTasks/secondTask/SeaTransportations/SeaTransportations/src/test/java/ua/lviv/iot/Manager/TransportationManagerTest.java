@@ -57,7 +57,7 @@ class TransportationManagerTest {
         marCarrier.addShip(new Ship(10000, 4000, 20, 550));
         marCarrier.doTransportation(sender, dest, 10);
         TransportationWriter writer = new TransportationWriter();
-        writer.writeToFile(marCarrier.getShips(), marCarrier.getTransportation());
+        writer.writeToFile(marCarrier.getShips(), marCarrier.getTransportations());
     }
 
 }
