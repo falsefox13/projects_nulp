@@ -3,7 +3,7 @@ class Ship:
     length, width, capacity, speed = 0, 0, 0, 0.0
     total_capacity = 0
 
-    def __init__(self, name="no name", length=0, width=0, capacity=0, speed=0.0):
+    def __init__(self, name="Titanic", length=0, width=0, capacity=0, speed=0.0):
         self.name = name
         self.length = length
         self.width = width
