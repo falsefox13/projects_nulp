@@ -1,7 +1,11 @@
 ua\lviv\iot\Models\SeaTransportation.class
 ua\lviv\iot\Manager\TransportationManager.class
 ua\lviv\iot\TransportationWriter.class
+ua\lviv\iot\persistence\dao\SeaTransportationDao.class
 ua\lviv\iot\Models\Ship.class
-ua\lviv\iot\TransportationServer.class
+ua\lviv\iot\persistence\dao\AbstractDao.class
 ua\lviv\iot\Models\Port.class
 ua\lviv\iot\rest\config\JaxRsConfig.class
+ua\lviv\iot\rest\service\TransportationServer.class
+ua\lviv\iot\persistence\dao\IDao.class
+ua\lviv\iot\persistence\dao\SeaTransportationDaoImpl.class

@@ -1,11 +1,15 @@
 package ua.lviv.iot.Models;
 
+
+import javax.persistence.*;
+
 /**
  * Class that describe one concrete transportation,
  * can calculate time, price and distance of one transportation.
  *
  * @author falsefox
  */
+@Entity
 public class SeaTransportation {
 
     /**
@@ -13,21 +17,34 @@ public class SeaTransportation {
      */
     public static final double RADIUS_OF_EARTH = 6371.009;
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "transportation_id")
     private int id;
+
+    @Transient
     private Port sender;
+
+    @Transient
     private Port destination;
+    @Column(name = "price_of_transportation")
     private double priceOfTransportation;
+    @Column(name = "max_price")
     private int maxPrice;
+    @Column(name = "duration_in_days")
     private int durationInDays;
+    @Column(name = "cargo")
     private int cargo; //in tonns
 
-    public  SeaTransportation(){
+    public SeaTransportation() {
 
     }
-    public SeaTransportation (final int id){
-        this.id=id;
+
+    public SeaTransportation(final int id) {
+        this.id = id;
 
     }
+
     public SeaTransportation(final Port newSender, final Port newDestination, final int newCargo) {
         this.sender = newSender;
         this.destination = newDestination;
