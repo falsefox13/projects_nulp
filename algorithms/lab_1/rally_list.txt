@@ -1,0 +1,12 @@
+Ukraine,3,50
+France,12,70
+Germany,20,66
+Poland,4,23
+USA,30,120
+Great Britain,6,20
+Ukraine,5,55
+France,112,750
+Germany,260,61
+Poland,40,28
+USA,50,123
+Great Britain,9,210
