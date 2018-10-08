@@ -1,63 +1,112 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>bowling</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="images/icon.png">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
-    <meta charset="UTF-8">
+    <title>Bowling</title>
   </head>
-  <body>  
-  	<div class="navbar">
-	  <a href="bowling.html">Main</a>
-	  <div class="dropdown">
-	    <button class="dropbtn">Bowling Centers</button>
-	    <div class="dropdown-content">
-	      <a href="#">Lviv</a>
-	      <a href="#">Kyiv</a>
-	      <a href="#">Odessa</a>
-	    </div>
-	  </div>
-	  <a href="#">News</a>
-	  <a href="#">Fans</a>
-	  <a href="#">Contacts</a>
-	  <a href="#">Admin</a> 
-	  <img id="logo" src="https://purepng.com/public/uploads/large/purepng.com-bowlingbowlingsportsrollsbowling-ball-17015281009210if23.png" alt="Logo" height="40" width="60">
-	</div>
+  <body>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="index.html">Main</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="active">
+        <a class="nav-link" href="news.html">News</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="fans.html">Fans</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Bowling Centers
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="bowling_clubs.html">Lviv</a>
+          <a class="dropdown-item" href="#">Kyiv</a>
+          <a class="dropdown-item" href="#">Odessa</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="contacts.html">Contacts</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="admin.html">Admin</a>
+      </li>
+    </ul>
+  </div>
+   <img id="logo" src="images/icon.png" alt="Logo" height="40" width="60">
+</nav>
+<content>
 	<div class="main">
-    <h1>Last news</h1>
-    <div class="news-container">
-      <figure class="news-item">
-        <img class="thumbnail" src="http://www.abf-online.org/album/18thasiang/aug26/WOmstr_blk1_top3.jpg">
-        <p class="date">01.09.2018</p>
-        <p class="descr">26th August, Palembang: 2014 Asian Championships Trios gold medallist, Mirai Ishimoto of Japan took a surprise lead of the first block Women's Masters finals at the 18th Asian Games Palembang 2018 ahead of Korea's Lee Yeonji in second and Singapore's Joey Yeo third.</p>
-      </figure>
-      <figure class="news-item">
-        <img class="thumbnail" src="http://nbf.bowlen.nl/portals/11/nbf/logos%20en%20plaatjes/Evenementen/world-bowling-tour.jpg">
-        <p class="date">31.08.2018</p>
-        <p class="descr">In an effort to review the current state of global bowling specifications, World Bowling will solicit input from member federations and industry stakeholders to determine if changes are necessary.
-		Currently, World Bowling recognizes specifications set by the United States Bowling Congress (USBC) on a global scale, however, USBC is one of 112 World Bowling member federations. </p>
-      </figure>
-      <figure class="news-item">
-        <img class="thumbnail" src="https://www.bowlingdigital.com/wp-content/uploads/2018/04/2018InaugurationBowlingFederationAfricaSlider-830x437.jpg">
-        <p class="date">28.08.2018</p>
-        <p class="descr">On Wednesday, April 4, a meeting in Cairo, Egypt, took place to inaugurate World Bowling’s Bowling Federation of Africa (BFA). This meeting solidifies the many months of hard work undertaken by World Bowling representatives and key figures of the sport within Africa to establish the governance needed to create the African zone.</p>
-      </figure>
-      <figure class="news-item">
-        <img class="thumbnail" src="http://www.cmas.org/php_images/olympic-channel-signs-deal-697x466.jpg">
-        <p class="date">01.08.2018</p>
-        <p class="descr">The Olympic Channel today announced that it has reached a cooperation agreement with World Bowling to collaborate on content for the Olympic Channel.</p>
-      </figure>
-      <figure class="news-item">
-        <img class="thumbnail" src="http://gobowling.com/portals/0/Images/News/AricAlmirolaNo.10Car.jpg">
-        <p class="date">27.07.2018</p>
-        <p>The Go Bowling at The Glen is the marquee event of the August 2-5 race weekend. The sport’s greatest drivers take center stage on Sunday, vying for a win at one of the most storied racetracks in the world.</p>
-      </figure>
-      <figure class="news-item">
-        <img class="thumbnail" src="http://gobowling.com/Portals/0/images/News/HolidayBowling1.jpg">
-        <p class="date">20.07.2018</p>
-        <p class="descr">HOLIDAYS + BOWLING = FUN
-		Looking for a fun outing during the holiday season? Well there’s no better time of the year to stop by your local bowling center than during the holidays. Whether it’s a company outing or just spending quality time with family and friends, your local bowling center has all of the bases covered.</p>
-      </figure>
+    <div class="container">
+    <h1 class="display-4">Last news</h1>
+   <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-lg-4 col-xl-3"> 
+        <div class="card">
+          <img class="card-img-top img-fluid" src="images/bowling_balls.png" alt="Card image">
+          <div class="card-body">
+            <h5 class="card-title">01.09.2018</h5>
+            <p class="card-text">26th August, Palembang: 2014 Asian Championships Trios gold medallist, Mirai Ishimoto of Japan took a surprise lead of the first block Women's Masters finals at the 18th Asian Games Palembang 2018 ahead of Korea's Lee Yeonji in second and Singapore's Joey Yeo third.</p>
+            <a href="#" class="btn btn-primary">Read more...</a>
+          </div>
+        </div>
+      </div>
+      
+       <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card">
+          <img class="card-img-top img-fluid" src="images/bowling2.jpg">
+          <div class="card-body">
+            <h5 class="card-title">31.08.2018</h5>
+            <p class="card-text">HOLIDAYS + BOWLING = FUN
+              Looking for a fun outing during the holiday season? Well there’s no better time of the year to stop by your local bowling center than during the holidays. Whether it’s a company outing or just spending quality time with family and friends, your local bowling center has all of the bases covered.</p>
+            <a href="#" class="btn btn-primary">Read more...</a>
+          </div>
+        </div>
+      </div>
+
+        <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card">
+          <img class="card-img-top img-fluid" src="images/world-bowling-tour.jpg">
+          <div class="card-body">
+            <h5 class="card-title">26.08.2018</h5>
+            <p class="card-text">In an effort to review the current state of global bowling specifications, World Bowling will solicit input from member federations and industry stakeholders to determine if changes are necessary.
+        Currently, World Bowling recognizes specifications set by the United States Bowling Congress (USBC).</p>
+            <a href="#" class="btn btn-primary">Read more...</a>
+          </div>
+        </div> 
+        </div>  
+
+        <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card">
+          <img class="card-img-top img-fluid" src="images/olympic.jpg">
+          <div class="card-body">
+            <h5 class="card-title">01.08.2018</h5>
+            <p class="card-text">The Olympic Channel today announced that it has reached a cooperation agreement with World Bowling to collaborate on content for the Olympic Channel.</p>
+            <a href="#" class="btn btn-primary">Read more...</a>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="container">
+    <footer class="page-footer font-small">
+      <div class="footer-copyright text-center py-3">© 2018 Copyright:
+        <a href="index.html"> Bowling</a>
+      </div>
+    </footer>
     </div>
   	</div>
+</content>
 </body>
 </html>
