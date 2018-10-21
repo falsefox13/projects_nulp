@@ -52,6 +52,7 @@
      <h1 class="display-4">Fans reviews</h1>
       <div class="row">
         <div class="col-lg-10 col-md-8 mx-auto">
+          <div id="posts">
           <div class="post-preview">
               <h2 class="post-title">
                 Bowling at Papashon is just great!!!
@@ -62,9 +63,14 @@
                 Quality of equipment. The bowling paths have a very high quality coating - the System 300 laminate. It is made in Finland and is considered to be one of the best in the world.
                 Flexible tariffs, promotions, bonuses. Each player has a chance to get a nice gift if he knocks the required number of kegel and earns a certain number of points. Try your hand! This is your chance!
               </p>
-            <p class="post-meta">Posted on September 24, 2018
-              <a href="#" style="float: right;">by Bowlinger</a>
-            </p>
+            <div class="row">
+                <div class="col-auto">
+                  <p class="post-meta">Posted on 19.07.2018 </p>
+                </div>
+                <div class="col-auto">
+                  <p class="author"> <a href="#" style="float: right;">by bowlerrr</a></p>
+                </div>
+              </div>
           </div>
           <hr>
           <div class="post-preview">
@@ -75,9 +81,14 @@
                 New Lynn Bowling Club Members can practice on the green free of charge; and non-members for a small fee of $5.00 per person.
                 Come and check it out!
               </p>
-            <p class="post-meta">Posted on September 18, 2018
-              <a href="#" style="float: right;">by blogger1</a>
-            </p>
+            <div class="row">
+                <div class="col-auto">
+                  <p class="post-meta">Posted on 18.09.2018 </p>
+                </div>
+                <div class="col-auto">
+                  <p class="author"> <a href="#" style="float: right;">by bloger1</a></p>
+                </div>
+              </div>
           </div>
           <hr>
           <div class="post-preview">
@@ -87,23 +98,70 @@
               <p class="post-subtitle">
                 Visited on a Thursday night for dinner. The club was busy so was hoping for a nice meal. Ordered a pizza and a steak. Unfortunately both meals were just average. Steak was a bit chewy and lacked taste/seasoning. Pizza was average tasting also.
               </p>
-            <p class="post-meta">Posted on August 24, 2018
-              <a href="#" style="float: right;">by YoungBowl</a>
-            </p>
+              <div class="row">
+                <div class="col-auto">
+                  <p class="post-meta">Posted on 24.08.2018 </p>
+                </div>
+                <div class="col-auto">
+                  <p class="author"> <a href="#" style="float: right;">by YoungBowl</a></p>
+                </div>
+              </div>
           </div>
           <hr>
-
-          <h2 class="display-5">Share your opinion!</h1>
-          <form>
-          <div class="form-row">
-            <div class="col-11">
-              <textarea class="form-control" id="review" rows="3" placeholder="Add your review..."></textarea>
-            </div>
-            <div class="col-auto">
-               <button id="submit-btn" type="submit" class="btn btn-primary" >Submit</button>
-            </div>
           </div>
+          <h2 class="display-5">Share your opinion!</h2>
+      
+        <script>
+          function validateForm() {
+              var x = document.forms["reviewForm"]["review"].value;
+              if (x == "") {
+                  alert("Review must be filled out");
+                  return false;
+              }
+              else {
+                document.getElementById('review').value = "";
+                addAppeal(x);
+                return false;
+              }
+
+
+          function addAppeal(appeal) {
+                var newPost = document.createElement('post-preview');
+                var aText = document.createElement('h2');
+                aText.className = "post-title";
+                aText.innerHTML = appeal.split("\n",1);
+                var aSubtitle = document.createElement('p');
+                aSubtitle.className = "post-subtitle";
+                aSubtitle.innerHTML = appeal;
+                var dateTime = new Date();
+                var aDate = document.createElement('p');
+                aDate.className = "post-meta";
+                aDate.innerHTML = "Posted on " + dateTime.getDate() + '.'
+                  + (dateTime.getMonth()+1) + '.'
+                  + dateTime.getFullYear() + " by admin";
+                newPost.appendChild(aText);
+                newPost.appendChild(aSubtitle);
+                newPost.appendChild(aDate);
+                document.getElementById("posts").appendChild(newPost);
+              }
+          } </script>
+
+         
+          <form name="reviewForm">
+            <div class="form-row">
+              <div class="col-11">
+                <textarea class="form-control" id="review" rows="3" placeholder="Add your review..."></textarea>
+              </div>
+                <div class="col-auto">
+                  <input id="add_appeal" class="submit_button" type="button" onclick="validateForm();" value="Submit">
+                </div>
+              </div>
           </form>
+
+          </div>
+        </div>
+      </div>
+
         <div class="container">
         <footer class="page-footer font-small">
           <div class="footer-copyright text-center py-3">© 2018 Copyright:
