@@ -6,9 +6,10 @@
     <link rel="icon" href="images/icon.png">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
+    <script src="js/news.js" type="text/javascript"></script>
     <title>Bowling</title>
   </head>
-  <body>
+  <body onload="addElementNews()">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="js/bootstrap.min.js"></script>
 
@@ -50,7 +51,7 @@
     <div class="container">
     <h1 class="display-4">Last news</h1>
    <div class="container">
-    <div class="row">
+    <div class="row" id="news">
       <div class="col-md-6 col-lg-4 col-xl-3"> 
         <div class="card">
           <img class="card-img-top img-fluid" src="images/bowling_balls.png" alt="Card image">
@@ -64,7 +65,7 @@
       
        <div class="col-md-6 col-lg-4 col-xl-3">
         <div class="card">
-          <img class="card-img-top img-fluid" src="images/bowling2.jpg">
+          <img class="card-img-top img-fluid" src="images/bowling_balls.png">
           <div class="card-body">
             <h5 class="card-title">31.08.2018</h5>
             <p class="card-text">HOLIDAYS + BOWLING = FUN
@@ -76,7 +77,7 @@
 
         <div class="col-md-6 col-lg-4 col-xl-3">
         <div class="card">
-          <img class="card-img-top img-fluid" src="images/world-bowling-tour.jpg">
+          <img class="card-img-top img-fluid" src="images/bowling_balls.png">
           <div class="card-body">
             <h5 class="card-title">26.08.2018</h5>
             <p class="card-text">In an effort to review the current state of global bowling specifications, World Bowling will solicit input from member federations and industry stakeholders to determine if changes are necessary.
@@ -88,7 +89,7 @@
 
         <div class="col-md-6 col-lg-4 col-xl-3">
         <div class="card">
-          <img class="card-img-top img-fluid" src="images/olympic.jpg">
+          <img class="card-img-top img-fluid" src="images/bowling_balls.png">
           <div class="card-body">
             <h5 class="card-title">01.08.2018</h5>
             <p class="card-text">The Olympic Channel today announced that it has reached a cooperation agreement with World Bowling to collaborate on content for the Olympic Channel.</p>

@@ -52,7 +52,7 @@
        <h1 class="display-4">Add some news!</h1>
           <form>
               <h3 class="display-5">Add a photo:</h3>
-              <input type="file" class="form-control-file">
+              <input type="file" id="fileform" class="form-control-file">
               <br>
             <div class="form-row">
               <div class="col-11">
@@ -66,75 +66,10 @@
                <textarea id="long_descr" class="form-control" rows="5" style="border-color: black;"  placeholder="Long text goes here..."></textarea>
               </div>
               <div class="col-auto">
-                 <button id="submit-btn" type="submit" onclick="checkNews(); return false;" class="btn btn-primary">Add news</button>
+                 <button id="submit-btn" class="btn btn-primary">Add news</button>
               </div>
             </div>
           </form>
-
-          <script type="text/javascript">
-            function checkNewsTitle() {
-              var newsTitle = document.getElementById('title');
-              if (newsTitle.value === "") {
-                newsTitle.style.borderColor = "red";
-                return false;
-              }
-              else {
-                newsTitle.style.borderColor = "black";
-                return true;
-              }
-            }
-
-            function checkNewsShort() {
-              var newsShortText = document.getElementById('short_descr');
-              if (newsShortText.value === "") {
-                newsShortText.style.borderColor = "red";
-                return false;
-              }
-              else {
-                newsShortText.style.borderColor = "black";
-                return true;
-              }
-            }
- 
-            function checkNewsLong() {
-               var newsLongText =  document.getElementById('long_descr');
-               if (newsLongText.value === "") {
-                 newsLongText.style.borderColor = "red";
-                return false;
-              }
-              else {
-                newsLongText.style.borderColor = "black";
-                return true;
-              }
-            }
-
-
-            function checkNews() {
-              if (checkNewsTitle() && checkNewsShort() && checkNewsLong()) {
-                alert("Success!!!");
-                document.getElementById("title").value = ""
-                document.getElementById("short_descr").value = ""
-                document.getElementById("long_descr").value = ""
-                return true;
-              } 
-              else if (!checkNewsTitle() && !checkNewsShort() && !checkNewsLong()){
-                alert("You should fill in all fields!");
-                return false;
-              }
-              else if (!checkNewsTitle() && !checkNewsShort()){
-                alert("You should fill in title and short description!");
-                return false;
-              }
-              else if (!checkNewsTitle() && !checkNewsLong()){
-                alert("You should fill in title and long description!");
-                return false;
-              }
-              else if (!checkNewsLong() && !checkNewsShort()){
-                alert("You should fill in long and short description!");
-                return false;
-              }
-            }
-          </script>
 
         <div class="container">
         <footer class="page-footer font-small">
@@ -148,6 +83,6 @@
   </div>
   </content>
 
-
+<script src="js/admin.js" type="text/javascript"></script>
 </body>
 </html>
