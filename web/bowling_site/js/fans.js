@@ -1,4 +1,17 @@
-const review_template = (title, text, datetime) => `
+class Review{
+  constructor(title, review, datetime) {
+    this.title = title;
+    this.review = review;
+    this.datetime = datetime;
+  }
+}
+
+function reviewTemplate (review) {
+  var title = review.title;
+  var text = review.review;
+  var datetime = review.datetime;
+
+  return `
     <div class="post-preview">
       <h2 class="post-title">${title}</h2>
       <p class="post-subtitle">${text}</p>
@@ -12,20 +25,56 @@ const review_template = (title, text, datetime) => `
       </div>
     </div>
     `
+}
+
+var useLocalStorage = false;
 
 function isOnline() {
     return window.navigator.onLine;
 }
 
 function load_data() {
-  if(isOnline()) {
+  if(isOnline() && useLocalStorage) {
     items = JSON.parse(localStorage.getItem("reviews"));
-    for(var i = 0; i < items.length; i++){
-      $('#posts').append(
-          review_template(items[i].title, items[i].review, items[i].datetime)
+    if(items) {
+      for(var i = 0; i < items.length; i++){
+        var temp = new Review(items[i].title, items[i].review, items[i].datetime)
+        $('#posts').append(
+          reviewTemplate(temp)
         );
+      }
     }
-    } 
+  }
+  if(isOnline() && !useLocalStorage) {
+      var openDB = indexedDB.open("reviews-data", 1);
+      openDB.onupgradeneeded = function() {
+          var db = openDB.result;
+          var store = db.createObjectStore("reviews", {keyPath: "title"});
+          store.createIndex("title", "title", { unique: false });
+          store.createIndex("review", "review", { unique: false });
+          store.createIndex("datetime", "datetime", { unique: false });
+      }
+      openDB.onsuccess = function(event) {
+        var db = openDB.result;
+        var tx = db.transaction("reviews", "readwrite");
+          var store = tx.objectStore("reviews");
+          store.openCursor().onsuccess = function(event) {
+          var cursor = event.target.result;
+
+          if (cursor) {
+            var temp = new Review(cursor.value.title, cursor.value.review, cursor.value.datetime);
+              $('#posts').append(reviewTemplate(temp));
+              cursor.continue();
+          }
+        };
+          tx.oncomplete = function(){
+            db.close();
+          }
+      } 
+  }
+  if (!isOnline()) {
+    alert("You are offline");
+  }
 }
 
 reviews = []
@@ -42,15 +91,40 @@ function send() {
                 + date.getFullYear() + "\t"  
                 + date.getHours() + ":"  
                 + date.getMinutes();
-    if(!isOnline()) {
+    if(!isOnline() && useLocalStorage) {
       reviews.push(new_review)
       localStorage.setItem("reviews",JSON.stringify(reviews));
       alert('Message saved locally: "' + new_review.title + '"');
     }
-    if(isOnline()) {
+    if(isOnline() && useLocalStorage) {
       $('#posts').append(
-        review_template(new_review.title, new_review.review, new_review.datetime));
+        reviewTemplate(new_review));
         alert('Message sent to server: "' + new_review.title + '"');
+    }
+    if(!useLocalStorage) {
+      var openDB = indexedDB.open("reviews-data", 1);
+
+      openDB.onerror = function(event) {
+        alert("Error occurred when loading review");
+      };
+
+      openDB.onsuccess = function(event) {
+        var db = openDB.result;
+        var tx = db.transaction(["reviews"], "readwrite");
+        var store = tx.objectStore("reviews");
+        var temp = new Review(new_review.title, new_review.review, new_review.datetime);
+        console.log(temp);
+        var addReview = store.put(temp);
+        addReview.onsuccess = function(event){
+          alert("Review created");
+        }
+        addReview.onerror = function(event){
+          alert("Error occurred when loading reviews");
+        }
+        tx.oncomplete = function(){
+          db.close();
+        }
+      };
     }
   }
   else {
@@ -58,7 +132,7 @@ function send() {
     return;
   }
   clearUI();
-};
+}
 
 
 function clearUI () {
@@ -77,6 +151,7 @@ function sendAllToServer() {
     if (window.applicationCache) {
         window.addEventListener('online', function (e) {
           alert('Back online');
+          load_data();
         }, true);
 
         window.addEventListener('offline', function (e) {
