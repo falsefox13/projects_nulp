@@ -2,7 +2,7 @@ function isOnline() {
     return window.navigator.onLine;
 }
 
-var useLocalStorage = false;
+var useLocalStorage = null;
 
 class News {
   constructor(title, short_descr, long_descr, img) {
@@ -10,6 +10,17 @@ class News {
     this.short_descr = short_descr;
     this.long_descr = long_descr;
     this.img = img;
+  }
+}
+
+class ServerService {
+ async getFromServer() {
+    try {
+      const data = await fetch('/news/all');
+      return data.text();
+    } catch (error) {
+      console.error('Cannot fetch data: ', error);
+    }
   }
 }
 
@@ -33,7 +44,22 @@ function newsTemplate(news) {
 	 `
 }
 
- function addElementNews(){
+const service = new ServerService();
+
+ const addElementNews = async() => {
+ 	if(isOnline()) {
+ 		const items = await service.getFromServer();
+	  console.log(items);
+
+	  const itemsStringified = JSON.stringify(items);
+
+	  JSON.parse(items).forEach(({ title, long_descr, photo }) => {
+	         var tempNews = new News(title, "", long_descr, photo);
+	         $('#news').prepend(
+           newsTemplate(tempNews),
+         );
+   	});
+ 	}
 	if(isOnline() && useLocalStorage){
 	items = localStorage.getItem("news_list");
 	if(items) {

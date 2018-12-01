@@ -1,3 +1,5 @@
+var useLocalStorage = null;
+
 class Review{
   constructor(title, review, datetime) {
     this.title = title;
@@ -27,13 +29,51 @@ function reviewTemplate (review) {
     `
 }
 
-var useLocalStorage = false;
+class ServerService {
+  async sendToServer(data) {
+    try {
+      await fetch('/reviews', {
+        method: 'post',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(data),
+      });
+    } catch (error) {
+      console.error('Cannot fetch data: ', error);
+    }
+  }
+
+ async getFromServer() {
+    try {
+      const data = await fetch('/reviews/all');
+      return data.text();
+    } catch (error) {
+      console.error('Cannot fetch data: ', error);
+    }
+  }
+}
 
 function isOnline() {
     return window.navigator.onLine;
 }
 
-function load_data() {
+const rest_service = new ServerService();
+
+const load_data = async() => {
+  if(isOnline()) {
+  const items = await rest_service.getFromServer();
+  console.log(items);
+
+  const itemsStringified = JSON.stringify(items);
+
+  JSON.parse(items).forEach(({ title, text, datetime }) => {
+    var tempReview = new Review(title, text, datetime);
+    $('#posts').append(
+       reviewTemplate(tempReview)
+      );
+   });
+  }
   if(isOnline() && useLocalStorage) {
     items = JSON.parse(localStorage.getItem("reviews"));
     if(items) {
@@ -79,7 +119,7 @@ function load_data() {
 
 reviews = []
 
-function send() {
+const send = async() => {
   var review =  document.getElementById('review');
   if(review.value.trim() != "") {
     var new_review = {};
@@ -91,17 +131,21 @@ function send() {
                 + date.getFullYear() + "\t"  
                 + date.getHours() + ":"  
                 + date.getMinutes();
+    if(isOnline() ) {
+       await rest_service.sendToServer({
+        title : new_review.title,
+        text: new_review.review,
+        datetime: new_review.datetime,
+       })
+       alert('Message saved remotely: "' + new_review.title + '"');
+       clearUI();
+    }
     if(!isOnline() && useLocalStorage) {
       reviews.push(new_review)
       localStorage.setItem("reviews",JSON.stringify(reviews));
       alert('Message saved locally: "' + new_review.title + '"');
     }
-    if(isOnline() && useLocalStorage) {
-      $('#posts').append(
-        reviewTemplate(new_review));
-        alert('Message sent to server: "' + new_review.title + '"');
-    }
-    if(!useLocalStorage) {
+    if(!isOnline() && !useLocalStorage) {
       var openDB = indexedDB.open("reviews-data", 1);
 
       openDB.onerror = function(event) {

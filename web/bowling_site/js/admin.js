@@ -1,9 +1,9 @@
+var useLocalStorage = false;
+
 window.onload = function(){ 
 function isOnline() {
     return window.navigator.onLine;
 }
-
-var useLocalStorage = false;
 
 const title =  document.getElementById('title');
 const short_descr = document.getElementById('short_descr');
@@ -19,8 +19,25 @@ class News {
   }
 }
 
+class ServerService {
+  async sendToServer(data) {
+    try {
+      await fetch('/news', {
+        method: 'post',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(data),
+      });
+    } catch (error) {
+      console.error('Cannot fetch data: ', error);
+    }
+  }
+}
 
-const onSubmitPress = function(e){
+const service = new ServerService();
+
+const onSubmitPress = async(e) =>{
   e.preventDefault();
   title_v = title.value.trim();
   short_descr_v = short_descr.value.trim()
@@ -28,7 +45,18 @@ const onSubmitPress = function(e){
 
   if (title_v != 0 && short_descr_v != 0 && long_descr_v != 0) {
     var news = new News(title_v, short_descr_v, long_descr_v, img.files[0].name);
-    storeMessage(news);
+    if(isOnline()) {
+       await service.sendToServer({
+      title: title_v,
+      long_descr : long_descr_v,
+      photo: img.files[0].name,
+    });
+    alert('Message sent to server: "' + title_v + '"');
+    clearUI();
+    } else {
+      storeMessageLocaly(news)
+    }
+
   } 
   else if (title_v == 0 && short_descr_v == 0 && long_descr_v == 0){
     alert("Fill in all fields!");
@@ -48,20 +76,6 @@ const onSubmitPress = function(e){
   }
 }
 
-function storeMessage(box) {
-    if (isOnline()) {
-        storeMessageRemotely(box);
-    } else {
-        storeMessageLocaly(box);
-    }
-}
-
-
-function storeMessageRemotely(box) {
-    alert('Message sent to server: "' + box.title + '"');
-    clearUI();
-    return false;
-}
 
 function getNews() {
   var news = new Array;
