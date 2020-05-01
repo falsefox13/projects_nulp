@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'header.html' %}
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" style="margin-bottom: 10px">
+            <h4>Update Sensor</h4>
+        </div>
+    </div>
+    <form class="form-horizontal" id="edit_sensor_form" data-id="{{ obj.id }}">
+        <div class="form-group">
+            <label class="control-label col-sm-2">Serial number:</label>
+            <div class="col-sm-10">
+                <input class="form-control" id="serial_number" name="serial_number"
+                       placeholder="Serial number" value = "{{ obj.serial_number }}">
+            </div>
+        </div>
+         <div class="form-group">
+            <label class="control-label col-sm-2">Country:</label>
+            <div class="col-sm-10">
+                <input class="form-control" id="country" name="country"
+                       placeholder="Country" value = "{{ obj.country }}">
+            </div>
+        </div>
+         <div class="form-group">
+            <label class="control-label col-sm-2">City:</label>
+            <div class="col-sm-10">
+                <input class="form-control" id="City" name="city"
+                       placeholder="City" value = "{{ obj.city }}">
+            </div>
+        </div>
+         <div class="form-group">
+            <label class="control-label col-sm-2">Room:</label>
+            <div class="col-sm-10">
+                <input class="form-control" id="room" name="room"
+                       placeholder="Room" value = "{{ obj.room_name }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">Address:</label>
+            <div class="col-sm-10">
+                <input class="form-control" id="address" name="address"
+                       placeholder="Address" value = "{{ obj.address }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">Connection type:</label>
+            <div class="col-sm-10">
+                <input class="form-control" id="connection_type" name="connection_type"
+                       placeholder="Connection type" value = "{{ obj.connection_type }}">
+            </div>
+        </div>
+    <div class="row">
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button class="btn btn-default" onclick="edit()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+{% include 'footer.html' %}
+<script>
+    let edit = () => {
+        removeError()
+
+        var array = $("#edit_sensor_form").serializeArray();
+        var data = {};
+
+        $.map(array, function(n, i){
+            data[n['name']] = n['value'];
+        });
+
+        $.ajax({
+            url: `/sensor/edit/${$("#edit_sensor_form").data('id')}`,
+            type: 'PUT',
+            data: data,
+        })
+        .done(function(response) {
+            window.location.href = `${window.location.protocol}//${window.location.host}/sensor`
+        })
+        .fail(function(error) {
+            showError(error.responseText);
+        });
+    }
+
+</script>
+</html>

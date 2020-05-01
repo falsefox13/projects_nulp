@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'header.html' %}
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10" style="margin-bottom: 5px">
+                <p>Sensors List Page</p>
+            </div>
+            <div class="col-md-2" style="margin-bottom: 5px">
+                <div class="btn btn-block btn-primary" onclick="createOnClick('sensor')">Add Sensor</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table id="sensor_table" class="table table-striped table-bordered">
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+{% include 'footer.html' %}
+<script>
+    $(document).ready(function() {
+        table = $('#sensor_table').DataTable( {
+            responsive: true,
+            processing: true,
+            ajax: "/sensors",
+            ordering: false,
+            searching: false,
+            columns: [
+                { title: 'Serial number', data: 'serial_number' },
+                { title: 'Connection type', data : 'connection_type' },
+                { title: 'Country', data: 'country' },
+                { title: 'City', data: 'city' },
+                { title: 'Address', data: 'address' },
+                { title: 'Room', data: 'room' },
+                { title: 'Action', width: '20%', render: function ( data, type, row, meta ) {
+                    return `<div class="row"><div class="col-sm-6"><div class="btn btn-block btn-primary"
+                            onclick="editOnClick('sensor', ${row.id})">Edit</div></div>
+                            <div class="col-sm-6"><div class="btn btn-block btn-danger"
+                            onclick="deleteOnClick('sensor', ${row.id})">Delete</div></div></div>`
+                    }
+                }
+            ]
+        } );
+    } );
+</script>
+</html>
