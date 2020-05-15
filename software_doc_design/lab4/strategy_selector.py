@@ -2,6 +2,7 @@ from config import config_reader
 
 from event_hub_strategy import EventHubStrategy
 from terminal_strategy import TerminalStrategy
+from pub_sub_strategy import PubSubStrategy
 
 
 class StrategySelector(object):
@@ -11,7 +12,8 @@ class StrategySelector(object):
 
         self.strategies = {
             'event_hub': EventHubStrategy(url=self.dataset_url, filename=self.dataset_filename),
-            'terminal': TerminalStrategy(url=self.dataset_url, filename=self.dataset_filename)
+            'terminal': TerminalStrategy(url=self.dataset_url, filename=self.dataset_filename),
+            'pub_sub': PubSubStrategy(url=self.dataset_url, filename=self.dataset_filename)
         }
 
     def execute(self):
