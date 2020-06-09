@@ -1,3 +1,5 @@
+import json
+
 import pandas as pd
 from config import config_reader
 from data_states import DataInsertionStates as States
@@ -28,25 +30,29 @@ class EventHubStrategy(BaseStrategy):
         sender = client.add_sender(partition="0")
         client.run()
 
-        if latest_status == States.COMPLETED.value or latest_status == States.REFILL_ATTEMPT.value:
-            self.redis_client.set(dataset_id, States.REFILL_ATTEMPT.value)
-            print(States.REFILL_ATTEMPT.value)
-            return False
+#        if latest_status == States.COMPLETED.value or latest_status == States.REFILL_ATTEMPT.value:
+#            self.redis_client.set(dataset_id, States.REFILL_ATTEMPT.value)
+#            print(States.REFILL_ATTEMPT.value)
+#            return False
 
         client = Socrata(self.dataset_url, None)
         self.redis_client.set(dataset_id, States.STARTED.value)
 
-        for i in range(int(NUMBER_OF_MESSAGES / MESSAGES_PER_FETCH)):
-            results = client.get(self.dataset_filename, limit=MESSAGES_PER_FETCH, offset=MESSAGES_PER_FETCH * i)
+        for i in range(NUMBER_OF_MESSAGES):
+            results = client.get(self.dataset_filename, limit=1, offset=i)
             results_df = pd.DataFrame.from_records(results)
 
             current_progress = '{} - {}'.format(str(i * MESSAGES_PER_FETCH + 1), str((i + 1) * MESSAGES_PER_FETCH))
-            message = EventData(body=results_df.to_json())
+
+            json_dictionary = json.loads(results_df.to_json())
+            for key in json_dictionary:
+                json_dictionary[key] = json_dictionary[key].get('0')
+            message = EventData(body=json.dumps(json_dictionary))
+            print json.dumps(json_dictionary)
             sender.send(message)
             self.redis_client.set(dataset_id, current_progress)
 
             print('Progress {}'.format(current_progress))
-            print(results_df)
 
         self.redis_client.set(self.dataset_url + "_" + self.dataset_filename, States.COMPLETED.value)
         print(States.COMPLETED.value)
